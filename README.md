@@ -6,21 +6,17 @@ Authentincation -> Solution -> Pipeline -> DevSecOps -> Active/Active Set Up
 2. KMS Setup – Create KMS managed key by portal - for S3, RDS, Secrets
 3. Init Backend – Configure remote state: S3 bucket + DynamoDB (encrypted using KMS) & Accounts Roles
 4. # Apply and fix & ensure proper configuration
-5. VPC Setup – Public/private subnets, NAT, IGW
+5. VPC Setup – Public/private subnets, NAT, IGW 
+ # Doing the Infra CIDR Plan #
+6. Secrets Manager – Store sensitive app configs (encrypted with KMS - do it by portal to not expose it in the statefile)
 
-Secrets Manager – Store sensitive app configs (encrypted with KMS)
-
-Aurora PostgreSQL Primary – Primary Aurora DB
-
-S3 Bucket – Encrypted app storage
-
-EKS Cluster – Multi-node cluster + IAM roles
-
-SES Setup – Email sending config (region-specific)
-
-Route 53 – Global hosted zone setup
-
-ArgoCD/CI/CD – GitOps agents and pipelines
+7. S3 Bucket – Encrypted app storage
+8. EKS Cluster – Multi-node cluster + IAM roles
+9. SES Setup – Email sending config (region-specific)
+10. Aurora PostgreSQL Primary – Primary Aurora DB
+11. Route 53 – Global hosted zone setup
+12. better by kustomize/helm : ArgoCD/CI/CD – GitOps agents 
+13. Github Action Terraform pipelines
 
 App Deployment – React frontend, Go backend
 
