@@ -28,7 +28,7 @@ resource "aws_s3_bucket" "tf_backend" {
   bucket         = "${local.prefix}-tf-backend-primary"
   force_destroy  = false
 
-  tags = merge(local.tags, {
+  tags = merge(var.tags, {
     Name = "${local.prefix}-tf-backend-primary"
   })
 }
@@ -71,7 +71,7 @@ resource "aws_dynamodb_table" "tf_lock" {
     type = "S"
   }
 
-  tags = merge(local.tags, {
+  tags = merge(var.tags, {
     Name = "${local.prefix}-tf-lock-primary"
   })
 }
