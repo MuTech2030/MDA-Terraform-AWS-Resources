@@ -54,11 +54,6 @@ terraform {
 locals {
   prefix = "mda"
   region = var.primary_region
-  tags = {
-    Environment   = "prod"
-    Project       = "aws-tower-root-account"
-    BusinessUnit  = "Platform-Team"
-    Owner         = "DevOps-Team"
-    Terraform     = "1"
-  }
+  tags = var.tags
+
 }

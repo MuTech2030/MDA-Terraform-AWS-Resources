@@ -6,3 +6,9 @@ data "aws_caller_identity" "current" {}
 data "aws_kms_key" "mda_root_encryption" {
   key_id = "alias/mda-root-encryption-key"
 }
+
+#######################################
+# 04 - Data Sources
+#######################################
+data "aws_availability_zones" "available" {}
+
