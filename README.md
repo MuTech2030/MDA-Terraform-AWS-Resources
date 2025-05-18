@@ -1,14 +1,12 @@
 # MDA-Terraform-AWS-Resources
 This is to demo EKS based Solution in AWS with Terraform, Go, React, Python, DevSecOps Tools
-
+Authentincation -> Solution -> Pipeline -> DevSecOps -> Active/Active Set Up
 # 🔹 Region 1 (Primary) Plan
-Init Provider – Define default AWS provider for Region 1 (provider "aws" { region = "us-east-1" })
-
-KMS Setup – Create KMS keys for S3, RDS, Secrets
-
-Init Backend – Configure remote state: S3 bucket + DynamoDB (encrypted using KMS)
-
-VPC Setup – Public/private subnets, NAT, IGW
+1. Init Provider – Define default AWS provider for Region 1 (provider "aws" { region = "us-east-1" }) & Region 2 for Aurora 
+2. KMS Setup – Create KMS managed key by portal - for S3, RDS, Secrets
+3. Init Backend – Configure remote state: S3 bucket + DynamoDB (encrypted using KMS) & Accounts Roles
+4. # Apply and fix & ensure proper configuration
+5. VPC Setup – Public/private subnets, NAT, IGW
 
 Secrets Manager – Store sensitive app configs (encrypted with KMS)
 

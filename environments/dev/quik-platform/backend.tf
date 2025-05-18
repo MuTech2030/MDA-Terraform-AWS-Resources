@@ -1,0 +1,64 @@
+#######################################
+# 01 - Providers for Multi-Region Setup
+#######################################
+provider "aws" {
+  region = var.primary_region
+  /*
+assume_role {
+  role_arn = "arn:aws:iam::533267417258:role/TowerAssumeRole"
+}
+  */
+}
+
+provider "aws" {
+  alias  = "secondary"
+  region = var.secondary_region
+  /*
+assume_role {
+  role_arn = "arn:aws:iam::533267417258:role/TowerAssumeRole"
+}
+  */
+}
+
+#########################################
+# 02 - Required Providers with Constraints
+#########################################
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.85.0"
+    }
+  }
+}
+
+###################################################
+# 03 - Remote Backend (S3 + DynamoDB) - Primary Only
+###################################################
+
+terraform {
+  backend "s3" {
+    bucket         = "mda-tf-backend-primary"
+    key            = "env/dev/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "mda-tf-lock-primary"
+    encrypt        = true
+  }
+}
+
+
+##########################
+# 05 - Local Configuration
+##########################
+
+locals {
+  prefix = "mda"
+  region = var.primary_region
+  tags = {
+    Environment   = "prod"
+    Project       = "aws-tower-root-account"
+    BusinessUnit  = "Platform-Team"
+    Owner         = "DevOps-Team"
+    Terraform     = "1"
+  }
+}
