@@ -52,8 +52,8 @@ terraform {
 ##########################
 
 locals {
-  prefix = "mda_quik_platform"
-  region = var.primary_region
-  tags = var.tags
-  actual_quick_platform_s3    = join("-", [local.prefix, var.bucket_name_quick_platform_s3 , local.region])
+  prefix                   = "mda-quik-platform"
+  region                   = var.primary_region
+  tags                     = var.tags
+  actual_quick_platform_s3 = join("-", [local.prefix, var.bucket_name_quick_platform_s3, local.region])
 }

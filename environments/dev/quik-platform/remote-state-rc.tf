@@ -25,8 +25,8 @@ locals {
 # 03 - Backend S3 Bucket
 #######################################
 resource "aws_s3_bucket" "tf_backend" {
-  bucket         = "${local.prefix}-tf-backend-primary"
-  force_destroy  = false
+  bucket        = "${local.prefix}-tf-backend-primary"
+  force_destroy = false
 
   tags = merge(var.tags, {
     Name = "${local.prefix}-tf-backend-primary"
