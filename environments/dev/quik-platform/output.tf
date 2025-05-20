@@ -11,12 +11,39 @@ output "primary_region" {
 #######################################
 # 03 - VPC - Subnets
 #######################################
-output "vpc_id" {
-  description = "ID of the created VPC"
-  value       = module.vpc.vpc_id
+output "named_private_subnet_ids" {
+  value = module.vpc.private_subnet_ids_with_names
 }
 
-output "private_subnet_ids" {
-  description = "IDs of private subnets"
-  value       = module.vpc.private_subnet_ids
+#######################################
+# 03 - S3
+#######################################
+
+output "bucket_id" {
+  description = "The name (ID) of the S3 bucket"
+  value       = module.quick-platform-s3.bucket_id
+}
+
+output "bucket_arn" {
+  description = "The ARN of the S3 bucket"
+  value       = module.quick-platform-s3.bucket_arn
+}
+
+#######################################
+# 03 - Postgress RDS
+#######################################
+output "db_endpoint" {
+  value = module.postgres.endpoint
+}
+
+output "db_arn" {
+  value = module.postgres.arn
+}
+
+#######################################
+# 03 - SG
+#######################################
+output "security_group_id" {
+  description = "The ID of the created security group"
+  value       = module.my_security_group.security_group_id
 }

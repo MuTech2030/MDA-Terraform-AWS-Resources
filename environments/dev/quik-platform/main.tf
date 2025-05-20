@@ -2,12 +2,13 @@
 # 01 - Module Call for VPC
 #######################################
 module "vpc" {
-  source             = "git@github.com:MuTech2030/MDA-Terraform-AWS-Modules.git//terraform-modules/03-vpc"
-  vpc_cidr           = var.vpc_cidr
-  name_prefix        = var.name_prefix
-  private_subnet_map = var.private_subnet_map
-  tags               = var.tags
+  source          = "git@github.com:MuTech2030/MDA-Terraform-AWS-Modules.git//terraform-modules/03-vpc"
+  vpc_cidr        = var.vpc_cidr
+  tags            = var.tags
+  private_subnets = var.private_subnets
 }
+
+
 
 #######################################
 # 01 - Module Call for S3
@@ -27,3 +28,43 @@ module "quick-platform-s3" {
   log_bucket_name       = var.log_bucket_name
 }
 
+#######################################
+# 04 - Postgress RDS
+#######################################
+
+module "postgres" {
+  source                      = "git@github.com:MuTech2030/MDA-Terraform-AWS-Modules.git//terraform-modules/06-rds-postgresql"
+  allocated_storage           = var.allocated_storage
+  engine                      = var.engine
+  engine_version              = var.engine_version
+  instance_class              = var.instance_class
+  db_name                     = var.db_name
+  username                    = var.username
+  password                    = var.password
+  skip_final_snapshot         = var.skip_final_snapshot
+  publicly_accessible         = var.publicly_accessible
+  aws_db_subnet_group_name    = var.aws_db_subnet_group_name
+  aws_db_subnet_group_name_id = local.rds_subnet_names
+  vpc_security_group_ids      = [module.my_security_group.security_group_id]
+  tags                        = var.tags
+}
+locals {
+  rds_subnet_names = [
+    module.vpc.private_subnet_ids_with_names["rds-subnet-az1"],
+    module.vpc.private_subnet_ids_with_names["rds-subnet-az2"]
+  ]
+}
+
+
+#######################################
+# 05 - AWS SG 
+#######################################
+module "my_security_group" {
+  source = "git@github.com:MuTech2030/MDA-Terraform-AWS-Modules.git//terraform-modules/13-sg"
+
+  vpc_id = module.vpc.vpc_id
+  tags   = var.tags
+
+  ingress_rules = var.ingress_rules
+  egress_rules  = var.egress_rules
+}

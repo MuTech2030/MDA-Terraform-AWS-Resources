@@ -25,11 +25,11 @@ locals {
 # 03 - Backend S3 Bucket
 #######################################
 resource "aws_s3_bucket" "tf_backend" {
-  bucket        = "${local.prefix}-tf-backend-primary"
+  bucket        = "mda-tf-backend-primary"
   force_destroy = false
 
   tags = merge(var.tags, {
-    Name = "${local.prefix}-tf-backend-primary"
+    Name = "mda-tf-backend-primary"
   })
 }
 
@@ -62,7 +62,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "tf_backend_sse" {
 # 06 - DynamoDB Lock Table
 #######################################
 resource "aws_dynamodb_table" "tf_lock" {
-  name         = "${local.prefix}-tf-lock-primary"
+  name         = "mda-quik-platform-tf-lock-primary"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
 
@@ -72,7 +72,7 @@ resource "aws_dynamodb_table" "tf_lock" {
   }
 
   tags = merge(var.tags, {
-    Name = "${local.prefix}-tf-lock-primary"
+    Name = "mda-quik-platform-tf-lock-primary"
   })
 }
 

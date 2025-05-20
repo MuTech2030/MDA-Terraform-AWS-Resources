@@ -16,16 +16,20 @@ variable "vpc_cidr" {
   description = "CIDR block for the VPC"
 }
 
-variable "name_prefix" {
-  type        = string
-  description = "Prefix for naming AWS resources"
-}
-
-variable "private_subnet_map" {
+variable "tags" {
   type        = map(string)
-  description = "Map of AZ to private subnet CIDRs"
+  description = "Tags to apply to resources"
+  default     = {}
 }
 
+variable "private_subnets" {
+  type = map(object({
+    cidr_block = string
+    name       = string
+    az         = optional(string)
+  }))
+  description = "Map of subnet name to CIDR, name, and optional AZ"
+}
 
 
 #######################################
@@ -37,12 +41,6 @@ variable "bucket_name_quick_platform_s3" {
   type        = string
 }
 
-
-variable "tags" {
-  type        = map(string)
-  description = "Tags to apply to all resources"
-  default     = {}
-}
 
 variable "sse_algorithm" {
   type        = string
@@ -93,5 +91,82 @@ variable "log_bucket_name" {
 }
 
 #######################################
-# 04 - Module Call for 
+# 04 - Postgress RDS
 #######################################
+variable "allocated_storage" {
+  type = number
+}
+variable "aws_db_subnet_group_name" {
+  type = string
+}
+
+variable "engine_version" {
+  type = string
+}
+variable "engine" {
+  type = string
+}
+variable "instance_class" {
+  type = string
+}
+
+variable "db_name" {
+  type = string
+}
+
+variable "username" {
+  type = string
+}
+
+variable "password" {
+  type    = string
+  default = ""
+}
+
+variable "skip_final_snapshot" {
+  type = bool
+}
+
+variable "publicly_accessible" {
+  type = bool
+}
+
+
+
+variable "vpc_security_group_ids" {
+  type = list(string)
+}
+
+
+variable "vpc_id" {
+  description = "The ID of the VPC where the security group will be created"
+  type        = string
+}
+
+
+
+#######################################
+# 04 - AWS SG
+#######################################
+
+variable "ingress_rules" {
+  description = "Ingress rules"
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+    description = optional(string)
+  }))
+}
+
+variable "egress_rules" {
+  description = "Egress rules"
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+    description = optional(string)
+  }))
+}
