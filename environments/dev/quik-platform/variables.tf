@@ -181,3 +181,7 @@ variable "eks_control_plane_name" {
   type        = string
   description = "the name of the eks control plane"
 }
+
+variable "worker_policy_arns" {
+  type = list(string)
+}

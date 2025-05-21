@@ -120,3 +120,8 @@ egress_rules = [
 ### EKS
 eks_iam_role_name      = "mda-dev-quik-platform-eks-cluster-role"
 eks_control_plane_name = "mda-quik-platform-eks-control-plane"
+worker_policy_arns = [
+  "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+  "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+  "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+]

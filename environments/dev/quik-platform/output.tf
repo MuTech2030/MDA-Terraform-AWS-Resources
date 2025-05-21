@@ -52,4 +52,9 @@ output "security_group_id" {
 # 03 - EKS
 #######################################
 
+output "gpu_node_group_name" {
+  value = module.gpu_node_group.node_group_name
+}
+
+
 

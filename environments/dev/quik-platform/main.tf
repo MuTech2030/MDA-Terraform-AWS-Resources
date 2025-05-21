@@ -58,6 +58,7 @@ locals {
     module.vpc.private_subnet_ids_with_names["apps-nodepool-subnet-2"]
   ]
   eks_security_group_ids = [module.my_security_group.security_group_id]
+  gpu_node_group_subnet  = [module.vpc.private_subnet_ids_with_names["apps-nodepool-subnet-1"]]
   # eks_iam_role_arn =[module.eks_control_plane.role_arn]
 }
 
