@@ -39,7 +39,7 @@ terraform {
 terraform {
   backend "s3" {
     bucket         = "mda-tf-backend-primary"
-    key            = "mda/env/dev/quik-platform/terraform.tfstate"
+    key            = "mda/env/sharedservices/remote-state/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "mda-tf-lock-primary"
     encrypt        = true
@@ -52,8 +52,8 @@ terraform {
 ##########################
 
 locals {
-  prefix                   = "mda-quik-platform"
+  prefix                   = "mda"
   region                   = var.primary_region
   tags                     = var.tags
-  actual_quick_platform_s3 = join("-", [local.prefix, var.bucket_name_quick_platform_s3, local.region])
+  actual_quick_platform_s3 = join("-", [local.prefix, var.bucket_name_mda_s3, local.region])
 }
