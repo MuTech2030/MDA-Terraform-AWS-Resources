@@ -170,3 +170,14 @@ variable "egress_rules" {
     description = optional(string)
   }))
 }
+
+
+## EKS
+variable "eks_iam_role_name" {
+  type        = string
+  description = "the name of the eks_iam_role"
+}
+variable "eks_control_plane_name" {
+  type        = string
+  description = "the name of the eks control plane"
+}

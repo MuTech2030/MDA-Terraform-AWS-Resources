@@ -87,7 +87,7 @@ publicly_accessible = false
 
 aws_db_subnet_group_name = "quik-platform-rds-subnet-group"
 
-vpc_security_group_ids   = [] # passed from module, not hardcoded
+vpc_security_group_ids = [] # passed from module, not hardcoded
 
 
 
@@ -115,3 +115,8 @@ egress_rules = [
     description = "Allow all egress"
   }
 ]
+
+
+### EKS
+eks_iam_role_name      = "mda-dev-quik-platform-eks-cluster-role"
+eks_control_plane_name = "mda-quik-platform-eks-control-plane"

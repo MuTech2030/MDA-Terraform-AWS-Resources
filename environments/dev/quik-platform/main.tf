@@ -53,6 +53,12 @@ locals {
     module.vpc.private_subnet_ids_with_names["rds-subnet-az1"],
     module.vpc.private_subnet_ids_with_names["rds-subnet-az2"]
   ]
+  eks_subnet_ids = [
+    module.vpc.private_subnet_ids_with_names["apps-nodepool-subnet-1"],
+    module.vpc.private_subnet_ids_with_names["apps-nodepool-subnet-2"]
+  ]
+  eks_security_group_ids = [module.my_security_group.security_group_id]
+  # eks_iam_role_arn =[module.eks_control_plane.role_arn]
 }
 
 
