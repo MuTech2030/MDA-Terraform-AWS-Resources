@@ -12,3 +12,18 @@ data "aws_kms_key" "mda_root_encryption" {
 #######################################
 data "aws_availability_zones" "available" {}
 
+data "aws_iam_role" "dev_quik_chat_role" {
+  name = "DevQuikPlatformChatRole"
+}
+
+data "aws_iam_role" "dev_quik_llm_role" {
+  name = "DevQuikPlatformLLMRole"
+}
+
+data "aws_iam_role" "devops_team_role" {
+  name = "DevOpsTeamRole"
+}
+
+data "aws_iam_role" "security_team_role" {
+  name = "SecurityTeamRole"
+}
