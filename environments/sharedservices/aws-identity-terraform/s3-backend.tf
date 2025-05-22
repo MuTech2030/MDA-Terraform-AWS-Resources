@@ -53,7 +53,7 @@ terraform {
 ##########################
 
 locals {
-  prefix                   = "mda"
-  region                   = var.primary_region
-  tags                     = var.tags
+  prefix = "mda"
+  region = var.primary_region
+  tags   = var.tags
 }
