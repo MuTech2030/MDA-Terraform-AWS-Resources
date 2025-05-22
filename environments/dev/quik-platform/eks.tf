@@ -6,27 +6,27 @@ module "eks_control_plane" {
   subnet_ids             = local.eks_subnet_ids
   security_group_ids     = local.eks_security_group_ids
   tags                   = var.tags
-   
-aws_auth_roles = [
-  {
-    rolearn  = data.aws_iam_role.dev_quik_chat_role.arn
-    username = "devquik_chat"
-    groups   = ["system:masters"]
-  },
-  {
-    rolearn  = data.aws_iam_role.dev_quik_llm_role.arn
-    username = "devquik_llm"
-    groups   = ["poweruser"]
-  },
-  {
-    rolearn  = data.aws_iam_role.devops_team_role.arn
-    username = "devops_team"
-    groups   = ["system:masters"]
-  },
-  {
-    rolearn  = data.aws_iam_role.security_team_role.arn
-    username = "security_team"
-    groups   = ["security-audit"]
-  }
-]
+
+  aws_auth_roles = [
+    {
+      rolearn  = data.aws_iam_role.dev_quik_chat_role.arn
+      username = "devquik_chat"
+      groups   = ["system:masters"]
+    },
+    {
+      rolearn  = data.aws_iam_role.dev_quik_llm_role.arn
+      username = "devquik_llm"
+      groups   = ["poweruser"]
+    },
+    {
+      rolearn  = data.aws_iam_role.devops_team_role.arn
+      username = "devops_team"
+      groups   = ["system:masters"]
+    },
+    {
+      rolearn  = data.aws_iam_role.security_team_role.arn
+      username = "security_team"
+      groups   = ["security-audit"]
+    }
+  ]
 }
