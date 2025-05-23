@@ -7,8 +7,8 @@ module "cluster_autoscaler_wi" {
   policy_arns = [
     "arn:aws:iam::aws:policy/AmazonEKSClusterAutoscalerPolicy"
   ]
-  thumbprint                   = "9e99a48a9960b14926bb7f3b02e22da0afd6e3bb"
-  tags                         = var.tags
+  thumbprint = "9e99a48a9960b14926bb7f3b02e22da0afd6e3bb"
+  tags       = var.tags
   depends_on = [
     module.eks_control_plane
   ]

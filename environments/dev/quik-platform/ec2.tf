@@ -8,6 +8,9 @@ module "ec2_example" {
   instance_type             = "t3.micro"
   subnet_id                 = local.ec2_subnet_id
   iam_instance_profile_name = data.aws_iam_instance_profile.ssm_profile.name
-
-  tags = local.tags
+  user_data                 = <<-EOF
+              #!/bin/bash
+              echo "Hello from user data" > /tmp/hello.txt
+              EOF
+  tags                      = local.tags
 }
