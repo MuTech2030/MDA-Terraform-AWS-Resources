@@ -57,6 +57,11 @@ private_subnets = {
     name       = "ecr-subnet"
     az         = "us-east-1c"
   }
+  ecr = {
+    cidr_block = "10.0.12.0/24"
+    name       = "ec2-subnet"
+    az         = "us-east-1c"
+  }
 }
 
 
